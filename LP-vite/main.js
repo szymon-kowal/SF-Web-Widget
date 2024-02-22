@@ -1,7 +1,7 @@
 import "@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css";
 
 import SDK from "blocksdk";
-var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy
+var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy saasas
 
 var address, width, height, zoom, link, mapsKey;
 
