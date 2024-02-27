@@ -141,29 +141,8 @@ function updateSettings() {
                     "</div>" +
                     "</div>" +
                     "</div>";
-
-                const editor = document.getElementById(`editor-${i + 1}`);
-
-                editor.querySelectorAll("slds-button").forEach((button) => {
-                    button.addEventListener("click", () => {
-                        const command = this.getAttribute("data-command");
-
-                        command === "bold" ? toggleBold() : null;
-
-                        const value = this.getAttribute("data-value");
-                        execCommand(command, value);
-                    });
-                });
             }
         });
-}
-
-function execCommand(command, value = null) {
-    document.execCommand(command, false, value);
-}
-
-function toggleBold() {
-    execCommand("bold");
 }
 
 function updateSite() {
