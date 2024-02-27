@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>Maps Block</title>
+        <link
+            rel="stylesheet"
+            href="https://www.lightningdesignsystem.com/assets/styles/salesforce-lightning-design-system.min.css"
+        />
     </head>
     <body>
         <article class="slds-card">
@@ -27,161 +31,142 @@
                     </div>
                     <div class="slds-media__body">
                         <h2>
-                            <a
-                                href="javascript:void(0);"
-                                class="slds-card__header-link slds-truncate"
-                                title="[object Object]"
+                            <span class="slds-text-heading_small"
+                                >Oferta Lotto Template</span
                             >
-                                <span class="slds-text-heading_small"
-                                    >Google Maps Block</span
-                                >
-                            </a>
                         </h2>
                     </div>
                 </header>
             </div>
             <div class="slds-card__body slds-card__body_inner">
                 <div id="workspace">
-                    <div class="slds-form-element">
-                        <label
-                            class="slds-form-element__label"
-                            for="text-input-id-0"
-                            >Maps Key</label
-                        >
-                        <div class="slds-form-element__control">
-                            <input
-                                type="text"
-                                id="text-input-id-0"
-                                class="slds-input"
-                                placeholder="Your Google Maps API key"
-                            />
-                        </div>
-                    </div>
-                    <div class="slds-form-element">
-                        <label
-                            class="slds-form-element__label"
-                            for="text-input-id-1"
-                            >Address or Location Name</label
-                        >
-                        <div class="slds-form-element__control">
-                            <input
-                                type="text"
-                                id="text-input-id-1"
-                                class="slds-input"
-                                placeholder="e.g. Salesforce Tower Indianapolis"
-                            />
-                        </div>
-                    </div>
-                    <div class="slds-form-element">
-                        <label
-                            class="slds-form-element__label"
-                            for="slider-id-01"
-                        >
-                            <span class="slds-slider-label">
-                                <span class="slds-slider-label__label"
-                                    >Image Width</span
-                                >
-                            </span>
-                        </label>
-                        <div class="slds-form-element__control">
-                            <div class="slds-slider">
+                    <div class="heroImagePersonalization">
+                        <div class="slds-form-element">
+                            <label
+                                class="slds-form-element__label"
+                                for="link-input-id-0"
+                                >Hero image</label
+                            >
+                            <div class="slds-form-element__control">
                                 <input
-                                    type="range"
-                                    id="slider-id-01"
-                                    class="slds-slider__range"
-                                    value="200"
-                                    min="100"
-                                    max="800"
+                                    type="text"
+                                    id="link-input-id-0"
+                                    class="slds-input"
+                                    placeholder="Link do backgroundu hero image"
                                 />
-                                <span
-                                    class="slds-slider__value"
-                                    id="slider-id-01-val"
-                                    aria-hidden="true"
-                                    >200</span
-                                >
                             </div>
                         </div>
-                    </div>
-                    <div class="slds-form-element">
-                        <label
-                            class="slds-form-element__label"
-                            for="slider-id-02"
-                        >
-                            <span class="slds-slider-label">
-                                <span class="slds-slider-label__label"
-                                    >Image Height</span
-                                >
-                            </span>
-                        </label>
-                        <div class="slds-form-element__control">
-                            <div class="slds-slider">
+                        <div class="slds-form-element">
+                            <label
+                                class="slds-form-element__label"
+                                for="link-input-id-1"
+                                >Postać na hero image</label
+                            >
+                            <div class="slds-form-element__control">
                                 <input
-                                    type="range"
-                                    id="slider-id-02"
-                                    class="slds-slider__range"
-                                    value="200"
-                                    min="100"
-                                    max="800"
+                                    type="text"
+                                    id="link-input-id-1"
+                                    class="slds-input"
+                                    placeholder="Link do postaci"
                                 />
-                                <span
-                                    class="slds-slider__value"
-                                    id="slider-id-02-val"
-                                    aria-hidden="true"
-                                    >200</span
-                                >
                             </div>
                         </div>
-                    </div>
-                    <div class="slds-form-element">
-                        <label
-                            class="slds-form-element__label"
-                            for="slider-id-03"
-                        >
-                            <span class="slds-slider-label">
-                                <span class="slds-slider-label__label"
-                                    >Zoom Level</span
-                                >
-                            </span>
-                        </label>
-                        <div class="slds-form-element__control">
-                            <div class="slds-slider">
+                        <div class="slds-form-element">
+                            <label
+                                class="slds-form-element__label"
+                                for="text-input-id-0"
+                                >Tytuł konkursu</label
+                            >
+                            <div class="slds-form-element__control">
                                 <input
-                                    type="range"
-                                    id="slider-id-03"
-                                    class="slds-slider__range"
-                                    value="10"
-                                    min="1"
-                                    max="20"
+                                    type="text"
+                                    id="text-input-id-0"
+                                    class="slds-input"
+                                    placeholder="Tytuł..."
                                 />
-                                <span
-                                    class="slds-slider__value"
-                                    id="slider-id-03-val"
-                                    aria-hidden="true"
-                                    >10</span
-                                >
                             </div>
                         </div>
-                    </div>
-                    <div class="slds-form-element">
-                        <label
-                            class="slds-form-element__label"
-                            for="text-input-id-2"
-                            >Link Wrap</label
-                        >
-                        <div class="slds-form-element__control">
-                            <input
-                                type="text"
-                                id="text-input-id-2"
-                                class="slds-input"
-                                placeholder="Optional url for Link wrap"
-                            />
+                        <div class="slds-form-element">
+                            <label
+                                class="slds-form-element__label"
+                                for="text-input-id-1"
+                                >Informacja baner</label
+                            >
+                            <div class="slds-form-element__control">
+                                <input
+                                    type="text"
+                                    id="text-input-id-1"
+                                    class="slds-input"
+                                    placeholder="Treść informacji"
+                                />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label
+                                class="slds-form-element__label"
+                                for="text-input-id-2"
+                                >Tekst nagrody</label
+                            >
+                            <div class="slds-form-element__control">
+                                <input
+                                    type="text"
+                                    id="text-input-id-2"
+                                    class="slds-input"
+                                    placeholder="Link do postaci"
+                                />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label
+                                class="slds-form-element__label"
+                                for="link-input-id-3"
+                                >Link ukryty pod postacią</label
+                            >
+                            <div class="slds-form-element__control">
+                                <input
+                                    type="text"
+                                    id="link-input-id-3"
+                                    class="slds-input"
+                                    placeholder="Link w postaci"
+                                />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label
+                                class="slds-form-element__label"
+                                for="link-input-id-2"
+                                >Link do logo nagrody</label
+                            >
+                            <div class="slds-form-element__control">
+                                <input
+                                    type="text"
+                                    id="link-input-id-2"
+                                    class="slds-input"
+                                    placeholder="Link do postaci"
+                                />
+                            </div>
+                        </div>
+                        <div id="rules-container">
+                            <div class="slds-form-element">
+                                <label
+                                    class="slds-form-element__label"
+                                    for="number-input-id-0"
+                                    >Ilość zasad do wypunktowania</label
+                                >
+                                <div class="slds-form-element__control">
+                                    <input
+                                        type="number"
+                                        id="number-input-id-0"
+                                        class="slds-input"
+                                        placeholder="Liczba zasad"
+                                    />
+                                </div>
+                            </div>
+                            <div id="rules-sub-container"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer class="slds-card__footer">
-                For use in Salesforce Marketing Cloud block SDK demos only
-            </footer>
         </article>
 
         <script type="module" src="./main.js"></script>
