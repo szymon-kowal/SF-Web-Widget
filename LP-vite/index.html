@@ -177,57 +177,9 @@
                             <div id="rules-sub-container"></div>
                         </div>
                     </div>
-                    <div id="div_editor2">
-                        <p>Hello world!</p>
-                        <p><img src="/images/editor-image.png" /></p>
-                    </div>
                 </div>
             </div>
         </article>
-        <script>
-            var editor2cfg = {};
-
-            editor2cfg.toolbarfactory_mydropdown = function (cmd, suffix) {
-                var editor = this; //Use this, maybe editor2 variable is not ready yet.
-                var option = {};
-                var inp;
-                option.fillinput = function (input) {
-                    inp = input;
-                    inp.innerText = "Code Snippets";
-                    inp.style.overflowX = "hidden";
-                };
-                option.fillpanel = function (panel) {
-                    panel.style.padding = "8px";
-
-                    function CreateItem(name, code) {
-                        var div = panel.appendChild(
-                            document.createElement("div")
-                        );
-                        div.className = "code-snippet-item";
-                        div.innerText = name;
-                        div.onclick = function () {
-                            editor.insertHTML(code);
-                        };
-                    }
-
-                    CreateItem("Welcome", "<b>Welcome to our website.</b>");
-                    CreateItem(
-                        "Copyright",
-                        "<b>Copyright (c) MyCompany. All right reversed.</b>"
-                    );
-                };
-
-                var btn = editor.createToolbarDropDown(option, cmd, suffix);
-                return btn;
-            };
-            editor2cfg.toolbar = "mytoolbar";
-            editor2cfg.toolbar_mytoolbar =
-                "{bold,italic}|{fontname,fontsize}|{forecolor,backcolor}|removeformat|mydropdown" +
-                "#{undo,redo,fullscreenenter,fullscreenexit,togglemore}";
-            editor2cfg.subtoolbar_mymenu = "inserttable,insertimage,insertcode";
-
-            var editor2 = new RichTextEditor("#div_editor2", editor2cfg);
-        </script>
 
         <script type="module" src="./main.js"></script>
     </body>

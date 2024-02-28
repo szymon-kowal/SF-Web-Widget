@@ -3,6 +3,10 @@ import SDK from "blocksdk";
 
 var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy
 
+let richTextEditors = [];
+
+var editor2cfg = {};
+
 var heroImageUrl,
     personImgUrl,
     shopImgUrl,
@@ -11,6 +15,43 @@ var heroImageUrl,
     competitionPrizeText,
     personInsideUrl,
     rulesNumber;
+
+editor2cfg.toolbarfactory_mydropdown = function (cmd, suffix) {
+    var editor = this; //Use this, maybe editor2 variable is not ready yet.
+    var option = {};
+    var inp;
+    option.fillinput = function (input) {
+        inp = input;
+        inp.innerText = "Code Snippets";
+        inp.style.overflowX = "hidden";
+    };
+    option.fillpanel = function (panel) {
+        panel.style.padding = "8px";
+
+        function CreateItem(name, code) {
+            var div = panel.appendChild(document.createElement("div"));
+            div.className = "code-snippet-item";
+            div.innerText = name;
+            div.onclick = function () {
+                editor.insertHTML(code);
+            };
+        }
+
+        CreateItem("Welcome", "<b>Welcome to our website.</b>");
+        CreateItem(
+            "Copyright",
+            "<b>Copyright (c) MyCompany. All right reversed.</b>"
+        );
+    };
+
+    var btn = editor.createToolbarDropDown(option, cmd, suffix);
+    return btn;
+};
+editor2cfg.toolbar = "mytoolbar";
+editor2cfg.toolbar_mytoolbar =
+    "{bold,italic}|{fontname,fontsize}|{forecolor,backcolor}|removeformat|mydropdown" +
+    "#{undo,redo,fullscreenenter,fullscreenexit,togglemore}";
+editor2cfg.subtoolbar_mymenu = "inserttable,insertimage,insertcode";
 
 function debounce(func, wait, immediate) {
     var timeout;
@@ -31,7 +72,7 @@ function debounce(func, wait, immediate) {
 function updateSettings() {
     document.getElementById("link-input-id-0").value = heroImageUrl;
     document.getElementById("link-input-id-1").value = personImgUrl;
-    document.getElementById("link-input-id-1").value = shopImgUrl;
+    document.getElementById("link-input-id-2").value = shopImgUrl;
     document.getElementById("text-input-id-0").value = competitionName;
     document.getElementById("text-input-id-1").value = competitionInfo;
     document.getElementById("text-input-id-2").value = competitionPrizeText;
@@ -45,102 +86,20 @@ function updateSettings() {
             rulesNumber = document.getElementById("number-input-id-0").value;
 
             for (let i = 0; i < rulesNumber; i++) {
+                richTextEditors = i === 0 ? [] : richTextEditors;
+
                 rulesSDK.innerHTML +=
-                    "<div class='slds-form-element'>" +
-                    "<div class='slds-form-element__control'>" +
-                    "<div id='rich-text-" +
+                    "<div id='div_editor" +
                     (i + 1) +
-                    "' class='slds-rich-text-editor slds-grid slds-grid_vertical slds-nowrap'>" +
-                    "<div role='toolbar' id='editor-" +
+                    "'><p>Tekst zasady " +
                     (i + 1) +
-                    "' class='slds-rich-text-editor__toolbar slds-shrink-none'>" +
-                    "<ul aria-label='Format text' class='slds-button-group-list'>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='0' data-command='bold'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#bold'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Bold</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#italic'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Italic</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#underline'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Underline</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#strikethrough'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Strike Through</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "</ul>" +
-                    "<ul aria-label='Format body' class='slds-button-group-list'>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#richtextbulletedlist'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Bulleted List</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#richtextnumberedlist'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Numbered List</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#richtextindent'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Indent</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#richtextoutdent'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Outdent</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "</ul>" +
-                    "<ul aria-label='Remove Formatting' class='slds-button-group-list'>" +
-                    "<li>" +
-                    "<button class='slds-button slds-button_icon slds-button_icon-border-filled' tabindex='-1'>" +
-                    "<svg class='slds-button__icon' aria-hidden='true'>" +
-                    "<use xlink:href='/icons/utility-sprite/svg/symbols.svg#remove_formatting'></use>" +
-                    "</svg>" +
-                    "<span class='slds-assistive-text'>Remove Formatting</span>" +
-                    "</button>" +
-                    "</li>" +
-                    "</ul>" +
-                    "</div>" +
-                    "<div class='slds-rich-text-editor__textarea slds-grid'>" +
-                    "<div aria-label='Compose text' contenteditable='true' class='slds-rich-text-area__content slds-text-color_weak slds-grow'>Treść zasady " +
-                    (i + 1) +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>";
+                    "</p></div>";
+                let editor = new RichTextEditor(
+                    `#div_editor${i + 1}`,
+                    editor2cfg
+                );
+                richTextEditors.push(editor);
+                console.log(richTextEditors);
             }
         });
 }
