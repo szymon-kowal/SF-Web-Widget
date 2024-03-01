@@ -3,9 +3,7 @@ import SDK from "blocksdk";
 
 var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy
 
-let richTextEditors = [];
-
-var editor2cfg = {};
+let rulesMessages = [];
 
 var heroImageUrl,
     personImgUrl,
@@ -15,43 +13,6 @@ var heroImageUrl,
     competitionPrizeText,
     personInsideUrl,
     rulesNumber;
-
-editor2cfg.toolbarfactory_mydropdown = function (cmd, suffix) {
-    var editor = this; //Use this, maybe editor2 variable is not ready yet.
-    var option = {};
-    var inp;
-    option.fillinput = function (input) {
-        inp = input;
-        inp.innerText = "Code Snippets";
-        inp.style.overflowX = "hidden";
-    };
-    option.fillpanel = function (panel) {
-        panel.style.padding = "8px";
-
-        function CreateItem(name, code) {
-            var div = panel.appendChild(document.createElement("div"));
-            div.className = "code-snippet-item";
-            div.innerText = name;
-            div.onclick = function () {
-                editor.insertHTML(code);
-            };
-        }
-
-        CreateItem("Welcome", "<b>Welcome to our website.</b>");
-        CreateItem(
-            "Copyright",
-            "<b>Copyright (c) MyCompany. All right reversed.</b>"
-        );
-    };
-
-    var btn = editor.createToolbarDropDown(option, cmd, suffix);
-    return btn;
-};
-editor2cfg.toolbar = "mytoolbar";
-editor2cfg.toolbar_mytoolbar =
-    "{bold,italic}|{fontname,fontsize}|{forecolor,backcolor}|removeformat|mydropdown" +
-    "#{undo,redo,fullscreenenter,fullscreenexit,togglemore}";
-editor2cfg.subtoolbar_mymenu = "inserttable,insertimage,insertcode";
 
 function debounce(func, wait, immediate) {
     var timeout;
@@ -83,24 +44,38 @@ function updateSettings() {
         .getElementById("number-input-id-0")
         .addEventListener("input", function () {
             rulesSDK.innerHTML = "";
+            let ruleMessage;
             rulesNumber = document.getElementById("number-input-id-0").value;
 
             for (let i = 0; i < rulesNumber; i++) {
-                richTextEditors = i === 0 ? [] : richTextEditors;
+                if (
+                    rulesMessages.length >= i + 1 &&
+                    rulesMessages[i] !== null
+                ) {
+                    ruleMessage = rulesMessages[i];
+                } else {
+                    ruleMessage = "<p>Tekst zasady " + (i + 1) + "</p>";
+                }
+
+                rulesMessages.length < rulesNumber
+                    ? rulesMessages.push(null)
+                    : undefined;
 
                 rulesSDK.innerHTML +=
-                    "<div id='div_editor" +
-                    (i + 1) +
-                    "'><p>Tekst zasady " +
-                    (i + 1) +
-                    "</p></div>";
-                let editor = new RichTextEditor(
-                    `#div_editor${i + 1}`,
-                    editor2cfg
-                );
-                richTextEditors.push(editor);
-                console.log(richTextEditors);
+                    "<div data-tiny-editor " +
+                    "id='div_editor" +
+                    i +
+                    "'>" +
+                    ruleMessage +
+                    "</div>";
             }
+
+            rulesSDK.querySelectorAll("[data-tiny-editor]").forEach((e) => {
+                window.__tinyEditor.transformToEditor(e);
+                e.addEventListener("input", () => {
+                    rulesMessages[e.id.slice(-1)] = e.innerHTML;
+                });
+            });
         });
 }
 
@@ -173,7 +148,13 @@ function buildSite(data) {
         rulesOuterHTML +=
             "<div class='rule' id='rule-" +
             (i + 1) +
-            "'><div class='ruleLP'></div><div class='ruleText'></div></div>";
+            "'><div class='ruleLP'></div><div class='ruleBody'>" +
+            (i < rulesMessages.length && rulesMessages[i] !== null
+                ? rulesMessages[i]
+                : "") +
+            "</div></div>";
+
+        console.log(rulesMessages);
     }
 
     template =
