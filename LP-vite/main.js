@@ -148,7 +148,9 @@ function buildSite(data) {
         rulesOuterHTML +=
             "<div class='rule' id='rule-" +
             (i + 1) +
-            "'><div class='ruleLP'></div><div class='ruleBody'>" +
+            "'><div class='ruleLP'>" +
+            (i + 1) +
+            "</div><div class='ruleBody'>" +
             (i < rulesMessages.length && rulesMessages[i] !== null
                 ? rulesMessages[i]
                 : "") +
@@ -187,8 +189,8 @@ function buildSite(data) {
         "</div>" +
         "</div>" +
         "<div class='winnersTable'></div>" +
-        "<div class='rulesContainer'>";
-    "<h1>Jak wziąć udział w konkursie?<br>To proste!<h1>" +
+        "<div class='rulesContainer'>" +
+        "<h1>Jak wziąć udział w konkursie?<br>To proste!<h1>" +
         rulesOuterHTML +
         "</div>" +
         "</div>";
