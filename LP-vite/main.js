@@ -153,8 +153,6 @@ function buildSite(data) {
                 ? rulesMessages[i]
                 : "") +
             "</div></div>";
-
-        console.log(rulesMessages);
     }
 
     template =
@@ -188,7 +186,9 @@ function buildSite(data) {
         "</div>" +
         "</div>" +
         "</div>" +
-        "<div class='rulesContainer'>" +
+        "<div class='winnersTable'></div>" +
+        "<div class='rulesContainer'>";
+    "<h1>Jak wziąć udział w konkursie?<br>To proste!<h1>" +
         rulesOuterHTML +
         "</div>" +
         "</div>";
